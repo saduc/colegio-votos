@@ -1,0 +1,83 @@
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;  /* 👈 evita barras de scroll */
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 63%;
+  width: 900px;   /* 👈 tamaño fijo en px para evitar desbordes */
+  height: 600px;
+  background-image: url("/public/logocolegio.jpeg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100%;
+  background-image: url("/public/fondo_colegio.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+
+  /* Difuminado leve (≈1cm) */
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 98%, rgba(0,0,0,0) 100%);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: cover;
+
+  mask-image: linear-gradient(to right, rgba(0,0,0,1) 98%, rgba(0,0,0,0) 100%);
+  mask-repeat: no-repeat;
+  mask-size: cover;
+}
+
+/* Contenedor de bienvenida e instrucciones */
+.bienvenida {
+  background: #ffffff; /* fondo blanco sólido */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* mantiene el efecto elegante */
+  text-align: center;
+}
+
+/* Estilo del placeholder más oscuro */
+input::placeholder {
+  color: #000000;   /* un gris oscuro casi negro */
+  font-weight: bold;
+  opacity: 1;       /* muy importante: lo hace totalmente visible */
+}
+/* Tarjetas de los candidatos */
+.candidato-card {
+  background: #fff;             /* fondo sólido */
+  border: 2px solid #2c3e50;    /* borde definido */
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  opacity: 1 !important;        /* fuerza que NO estén opacos */
+  position: relative;           /* para estar por encima de ::before/::after */
+  z-index: 2;
+}
+
+.candidato-card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  object-fit: cover;
+  opacity: 1 !important;        /* imagen totalmente visible */
+}
