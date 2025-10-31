@@ -23,6 +23,18 @@ $resultados = [];
 while ($fila = $result->fetch_assoc()) {
     $resultados[] = $fila;
 }
+// ✅ Contar votos nulos (candidato con nombre 'voto nulo')
+$sqlNulos = "SELECT COUNT(v.id) AS total_nulos
+              FROM votos v
+              JOIN candidatos c ON v.id_candidato = c.id_candidato
+              WHERE LOWER(c.candidatos) = 'voto nulo'";
+$resNulos = $conn->query($sqlNulos);
+$totalNulos = 0;
+if ($resNulos && $resNulos->num_rows > 0) {
+    $row = $resNulos->fetch_assoc();
+    $totalNulos = (int)$row["total_nulos"];
+}
+
 
 // 🔢 Total general de votos
 $sqlTotal = "SELECT COUNT(*) as total_general FROM votos";
@@ -31,8 +43,10 @@ $totalGeneral = $resTotal->fetch_assoc()["total_general"] ?? 0;
 
 echo json_encode([
     "resultados" => $resultados,
-    "total_general" => $totalGeneral
+    "total_general" => $totalGeneral,
+    "total_nulos" => $totalNulos
 ]);
+
 
 $conn->close();
 ?>
