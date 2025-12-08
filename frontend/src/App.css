@@ -1,8 +1,8 @@
-
 .hero {
   position: relative;
   min-height: 100vh;
-  overflow: hidden;  /* 👈 evita barras de scroll */
+  overflow: hidden;
+  /* 👈 evita barras de scroll */
 }
 
 .hero::before {
@@ -10,7 +10,8 @@
   position: absolute;
   top: 20%;
   left: 63%;
-  width: 900px;   /* 👈 tamaño fijo en px para evitar desbordes */
+  width: 900px;
+  /* 👈 tamaño fijo en px para evitar desbordes */
   height: 600px;
   background-image: url("/public/logocolegio.jpeg");
   background-repeat: no-repeat;
@@ -36,40 +37,49 @@
   z-index: 0;
 
   /* Difuminado leve (≈1cm) */
-  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 98%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 98%, rgba(0, 0, 0, 0) 100%);
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: cover;
 
-  mask-image: linear-gradient(to right, rgba(0,0,0,1) 98%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 98%, rgba(0, 0, 0, 0) 100%);
   mask-repeat: no-repeat;
   mask-size: cover;
 }
 
 /* Contenedor de bienvenida e instrucciones */
 .bienvenida {
-  background: #ffffff; /* fondo blanco sólido */
+  background: #ffffff;
+  /* fondo blanco sólido */
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* mantiene el efecto elegante */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  /* mantiene el efecto elegante */
   text-align: center;
 }
 
 /* Estilo del placeholder más oscuro */
 input::placeholder {
-  color: #000000;   /* un gris oscuro casi negro */
+  color: #000000;
+  /* un gris oscuro casi negro */
   font-weight: bold;
-  opacity: 1;       /* muy importante: lo hace totalmente visible */
+  opacity: 1;
+  /* muy importante: lo hace totalmente visible */
 }
+
 /* Tarjetas de los candidatos */
 .candidato-card {
-  background: #fff;             /* fondo sólido */
-  border: 2px solid #2c3e50;    /* borde definido */
+  background: #fff;
+  /* fondo sólido */
+  border: 2px solid #2c3e50;
+  /* borde definido */
   border-radius: 12px;
   padding: 15px;
   text-align: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  opacity: 1 !important;        /* fuerza que NO estén opacos */
-  position: relative;           /* para estar por encima de ::before/::after */
+  opacity: 1 !important;
+  /* fuerza que NO estén opacos */
+  position: relative;
+  /* para estar por encima de ::before/::after */
   z-index: 2;
 }
 
@@ -79,5 +89,325 @@ input::placeholder {
   border-radius: 50%;
   border: 2px solid #000;
   object-fit: cover;
-  opacity: 1 !important;        /* imagen totalmente visible */
+  opacity: 1 !important;
+  /* imagen totalmente visible */
+}
+
+/* Estilo base del botón Votar */
+.button-votar {
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: none;
+  background: #029b02;
+  color: #063a09;
+  cursor: pointer;
+  font-weight: bold;
+  font-weight: bold;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  /* Agregar transición */
+}
+
+/* Efecto de Hover: al pasar el cursor sobre el botón */
+.button-votar:hover {
+  transform: scale(1.1);
+  /* Hace que el botón crezca un poco */
+  background-color: #00f715;
+  /* Cambia el color del botón */
+}
+
+/* Efecto de Clic: cuando el botón es presionado */
+.button-votar:active {
+  transform: scale(0.95);
+  /* Hace que el botón se haga más pequeño */
+}
+
+/* Animación de flotación */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+    /* Subir un poco */
+  }
+
+  100% {
+    transform: translateY(0);
+    /* Regresar a la posición original */
+  }
+}
+
+/* --- RESPONSIVE STYLES --- */
+
+/* Hero adjustments for smaller screens */
+@media (max-width: 1024px) {
+  .hero::before {
+    left: 50%;
+    width: 500px;
+    height: 300px;
+    top: 30%;
+  }
+
+  .hero::after {
+    width: 100%;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero::before {
+    display: none;
+    /* Hide large logo on mobile to avoid clutter */
+  }
+}
+
+/* Header Responsiveness */
+.app-header {
+  width: 100%;
+  background: linear-gradient(to right, #03201eff, #0a3b1fff);
+  color: #ffffffff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* Changed from space-between */
+  gap: 20px;
+  /* Add gap for spacing */
+  padding: 15px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  box-sizing: border-box;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-right: auto;
+  /* Pushes everything else to the right */
+}
+
+.header-title {
+  margin: 0;
+  font-size: 25px;
+}
+
+.header-center {
+  display: flex;
+  gap: 15px;
+  /* No fixed margin here, controlled by flexbox in parent */
+}
+
+.header-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+  filter: contrast(120%) brightness(95%);
+  margin-right: 30px;
+}
+
+/* Mobile Header */
+@media (max-width: 900px) {
+  .app-header {
+    flex-direction: column;
+    padding: 10px;
+    height: auto;
+  }
+
+  .header-left {
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-right: 0;
+    /* Reset auto margin for mobile */
+  }
+
+  .header-title {
+    font-size: 18px;
+    text-align: center;
+    flex-grow: 1;
+  }
+
+  .header-center {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .header-logo {
+    display: none;
+  }
+}
+
+/* Main Content Container */
+.main-content-container {
+  max-width: 1200px;
+  /* Aumentado para que quepan más cartas */
+  margin: 120px auto 0 auto;
+  padding: 10px;
+  width: 90%;
+}
+
+@media (max-width: 900px) {
+  .main-content-container {
+    margin-top: 160px;
+    /* More space for stacked header */
+  }
+}
+
+/* Candidatos Grid */
+.candidatos-grid {
+  display: flex;
+  /* Volver a flex para comportamiento original */
+  gap: 20px;
+  justify-content: center;
+  /* Centra las tarjetas en su celda */
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Responsive adjustments for cards */
+@media (max-width: 480px) {
+  .candidato-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .candidato-info {
+    align-items: center;
+    /* Centra texto y botón en móvil */
+  }
+
+  .candidato-nombre {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .candidatos-grid {
+    grid-template-columns: 1fr;
+    /* Una sola columna en móvil */
+  }
+}
+
+/* Admin Panel Responsive */
+.admin-panel-container {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: 400px;
+  height: calc(100% - 80px);
+  background: #fff;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+  z-index: 2000;
+  overflow-y: auto;
+}
+
+/* PDF Panel Responsive */
+.pdf-panel-container {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 80px);
+  background: #f4f6f9;
+  color: #333;
+  /* padding: 40px;  <-- Removed padding from container */
+  z-index: 2000;
+  overflow-y: auto;
+  /* Enables vertical scrolling */
+  display: flex;
+  flex-direction: column;
+  /* alignItems: center; <-- Removed to let margin:auto work on content */
+}
+
+.pdf-panel-content {
+  width: 100%;
+  max-width: 900px;
+  padding: 40px;
+  margin: 0 auto;
+  /* Centers the content */
+}
+
+.pdf-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  position: sticky;
+  top: 0;
+  background: #f4f6f9;
+  /* Matches container background */
+  z-index: 10;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+@media (max-width: 900px) {
+  .admin-panel-container {
+    top: 140px;
+    /* Adjust for taller header */
+    height: calc(100% - 140px);
+  }
+
+  .pdf-panel-container {
+    top: 140px;
+    height: calc(100% - 140px);
+  }
+
+  .pdf-panel-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-panel-container {
+    width: 100%;
+    top: 140px;
+  }
+}
+
+/* DNI Input Responsive */
+.dni-input-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dni-input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #000000ff;
+  width: 60%;
+  max-width: 300px;
+}
+
+@media (max-width: 480px) {
+  .dni-input {
+    width: 100%;
+  }
+}
+
+/* Estudiante Info Card */
+.estudiante-info-card {
+  margin-top: 30px;
+  padding: 15px;
+  border: 2px solid #058a01ff;
+  border-radius: 15px;
+  background: #ecf0f1;
+  text-align: left;
+  /* Alineación a la izquierda */
+  max-width: 700px;
+  /* Restaurar ancho original aproximado */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
